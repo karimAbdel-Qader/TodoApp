@@ -1,6 +1,6 @@
 package com.bm.todo.service
 
-import com.bm.todo.model.TODO
+import com.bm.todo.model.Todo
 import com.bm.todo.repository.ToDoRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -21,14 +21,17 @@ class ToDoService @Autowired constructor(
     /**
      * Fetch all unfinished ToDos
      */
-    fun getUnfinishedTodos() : List<TODO> = toDoRepository.findByStatus(false)
+    fun getUnfinishedTodos() : List<Todo> = toDoRepository.findByStatus(false)
 
     /**
      * Creates new Tod
      *
      * @param todo
      */
-    fun addTodo(todo: TODO) = toDoRepository.save(todo)
+    fun addTodo(taskName: String) : Todo {
+        var todo = Todo(taskName)
+        return toDoRepository.save(todo)
+    }
 
     /**
      * Update specific Tod by it's id
@@ -36,7 +39,7 @@ class ToDoService @Autowired constructor(
      * @param todoId
      */
     @Transactional
-    fun updateToDoStatus(todoId: Int) {
+    fun toggleStatus(todoId: Int) {
         var todo = toDoRepository.findById(todoId).get()
         todo.status = true
     }

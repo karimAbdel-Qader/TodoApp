@@ -1,9 +1,8 @@
 package com.bm.todo.controller
 
 import com.bm.todo.dto.ToDoDto
-import com.bm.todo.model.TODO
+import com.bm.todo.model.Todo
 import com.bm.todo.service.ToDoService
-import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -15,14 +14,13 @@ class ToDoController @Autowired constructor(
         val toDoService: ToDoService){
 
 
-
     @GetMapping
     fun getAllTodos() : ResponseEntity<*> {
-        var todoList : List<TODO> = toDoService.getUnfinishedTodos()
+        var todoList : List<Todo> = toDoService.getUnfinishedTodos()
         var toDoListDto = ArrayList<ToDoDto>()
 
-        for(toDo: TODO in todoList) {
-            var toDoDto = ToDoDto(toDo.id,toDo.task,toDo.status)
+        for(toDo: Todo in todoList) {
+            var toDoDto = ToDoDto(toDo.id,toDo.taskName,toDo.status)
             toDoListDto.add(toDoDto)
         }
 
@@ -31,17 +29,21 @@ class ToDoController @Autowired constructor(
 
     @PostMapping
     fun addTodo(@RequestBody todoDto: ToDoDto) : ResponseEntity<*>{
-        var todo = com.bm.todo.model.TODO(0,todoDto.task,todoDto.status)
-        toDoService.addTodo(todo)
+        var todo = toDoService.addTodo(todoDto.taskName)
 
-        todoDto.id = todo.id
-        return ResponseEntity.ok(todoDto)
+        var createdTodo = ToDoDto()
+            with(todoDto) {
+                id = todo.id
+                taskName = todo.taskName
+                status = todo.status
+            }
+
+        return ResponseEntity.ok(createdTodo)
     }
 
     @PatchMapping("/{todoId}/status")
     fun finishTask(@PathVariable todoId: Int) : ResponseEntity<*> {
-        toDoService.updateToDoStatus(todoId)
-
+        toDoService.toggleStatus(todoId)
         return ResponseEntity<Void>(HttpStatus.OK)
     }
 }

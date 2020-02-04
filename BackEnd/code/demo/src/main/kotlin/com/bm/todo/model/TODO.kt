@@ -4,12 +4,14 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "todo")
-data class TODO(@Id
-                @GeneratedValue(strategy = GenerationType.IDENTITY)
-                var id: Int,
+data class Todo(
+                @Column(nullable = false)
+                var taskName: String,
 
                 @Column(nullable = false)
-                var task: String,
+                var status: Boolean = false){
 
-                @Column(nullable = false)
-                var status: Boolean = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Int = 0
+}
