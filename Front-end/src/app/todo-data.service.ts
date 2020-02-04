@@ -10,7 +10,7 @@ import {MessageService} from './message.service';
     providedIn: 'root'
 })
 export class TodoDataService {
-    private apiUrl = 'api/v1/Todos';
+    private apiUrl = 'http://localhost:8080/v1/Todos';
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
