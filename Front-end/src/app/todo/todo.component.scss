@@ -1,0 +1,26 @@
+input{
+  margin: 0 40px;
+  border-radius: 10px;
+  border-color: dodgerblue;
+  padding: 5px;
+}
+button{
+  border-radius: 30%;
+  padding: 3px 9px;
+  background-color: dodgerblue;
+  color: #ffffff;
+  font-size: 22px;
+  border: none;
+}
+li{
+  margin: 40px auto;
+}
+
+.addTodo{
+  color: #555555;
+  width: max-content;
+  margin: auto;
+  display: flex;
+}
+
+
