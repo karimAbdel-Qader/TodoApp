@@ -1,7 +1,7 @@
 package com.bm.todo.service
 
 import com.bm.todo.model.Todo
-import com.bm.todo.repository.ToDoRepository
+import com.bm.todo.repository.TodoRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import javax.transaction.Transactional
@@ -10,18 +10,18 @@ import javax.transaction.Transactional
  *
  * This class has handling all the logic for the Todos.
  *
- * @param toDoRepository repository for Todos.
+ * @param todoRepository repository for Todos.
  * @constructor Creates a ToDoService with repository.
  */
 @Service
 class ToDoService @Autowired constructor(
-        val toDoRepository: ToDoRepository) {
+        val todoRepository: TodoRepository) {
 
 
     /**
      * Fetch all unfinished ToDos
      */
-    fun getUnfinishedTodos() : List<Todo> = toDoRepository.findByStatus(false)
+    fun getUnfinishedTodos() : List<Todo> = todoRepository.findByStatus(false)
 
     /**
      * Creates new Tod
@@ -30,7 +30,7 @@ class ToDoService @Autowired constructor(
      */
     fun addTodo(taskName: String) : Todo {
         var todo = Todo(taskName)
-        return toDoRepository.save(todo)
+        return todoRepository.save(todo)
     }
 
     /**
@@ -40,7 +40,7 @@ class ToDoService @Autowired constructor(
      */
     @Transactional
     fun toggleStatus(todoId: Int) {
-        var todo = toDoRepository.findById(todoId).get()
+        var todo = todoRepository.findById(todoId).get()
         todo.status = true
     }
 }
