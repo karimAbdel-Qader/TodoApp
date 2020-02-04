@@ -53,7 +53,7 @@ export class TodoDataService {
     // UPDATE A TODOO
 
     UpdateTodo(todo: Todo): Observable<any> {
-        return this.http.put(this.apiUrl, this.httpOptions).pipe(
+        return this.http.put(this.apiUrl, todo, this.httpOptions).pipe(
             tap(_ => this.log(`updated todo id=${todo.id}`)),
             catchError(this.handleError<Todo>('updateTodo'))
         );

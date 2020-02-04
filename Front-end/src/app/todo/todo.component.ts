@@ -38,4 +38,9 @@ export class TodoComponent implements OnInit {
         this.todos = this.todos.filter(t => t !== todo);
         this.todoService.deleteTodo(todo).subscribe();
     }
+
+    update(todo: Todo): void {
+        todo.complete = true;
+        this.todoService.UpdateTodo(todo).subscribe();
+    }
 }
