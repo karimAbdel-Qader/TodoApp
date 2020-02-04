@@ -28,10 +28,9 @@ export class TodoComponent implements OnInit {
             return;
         }
         this.todoService.addTodo({name} as Todo).subscribe(todo => {
-            if (todo.name) {
+            if (!todo.name) {
                 this.todos.push(todo);
             }
-
         });
     }
 
@@ -39,5 +38,4 @@ export class TodoComponent implements OnInit {
         this.todos = this.todos.filter(t => t !== todo);
         this.todoService.deleteTodo(todo).subscribe();
     }
-
 }

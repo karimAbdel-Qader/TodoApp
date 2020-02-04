@@ -1,10 +1,9 @@
-<div>
+<div class="addTodo">
   <label>Todo:
-    <input #todoName/>
+    <input #todoName autofocus/>
   </label>
   <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(todoName.value); todoName.value=''">
-    add
+  <button (click)="add(todoName.value); todoName.value=''">+
   </button>
 </div>
 <ul>

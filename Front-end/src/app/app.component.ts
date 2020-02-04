@@ -7,5 +7,5 @@ import {TodoComponent} from './todo/todo.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'My Todo';
+  title = 'All Tasks';
 }
