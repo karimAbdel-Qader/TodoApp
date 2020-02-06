@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
+
     @Autowired
     private val jwtAuthenticationEntryPoint: JwtAuthenticationEntryPoint? = null
     @Autowired
@@ -28,9 +29,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Autowired
     @Throws(Exception::class)
-    fun configureGlobal(auth: AuthenticationManagerBuilder) { // configure AuthenticationManager so that it knows from where to load
-// user for matching credentials
-// Use BCryptPasswordEncoder
+    fun configureGlobal(auth: AuthenticationManagerBuilder) {
+
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder())
     }
 
