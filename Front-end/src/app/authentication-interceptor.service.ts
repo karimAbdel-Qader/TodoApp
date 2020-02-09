@@ -23,7 +23,7 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
       });
       return next.handle(cloned);
     } else {
-      console.log('token does not exist')
+      console.log('token does not exist');
       return next.handle(req);
     }
   }
