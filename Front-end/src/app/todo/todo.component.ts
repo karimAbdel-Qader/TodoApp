@@ -14,6 +14,7 @@ export class TodoComponent implements OnInit {
 
   todos: Todo[];
   buttonText = 'Done';
+  inputText = '';
 
 
   ngOnInit() {
@@ -34,6 +35,10 @@ export class TodoComponent implements OnInit {
         this.todos.push(todo);
       }
     });
+  }
+
+  clearInput() {
+    this.inputText = '';
   }
 
   delete(todo: Todo): void {

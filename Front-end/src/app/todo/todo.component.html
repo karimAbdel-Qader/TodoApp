@@ -1,8 +1,8 @@
 <div class="addTodo">
   <label>Todo:
-    <input #todoName autofocus/>
+    <input [(ngModel)]="inputText" autofocus/>
   </label>
-  <button (click)="add(todoName.value); todoName.value=''">+
+  <button (click)="add(inputText); clearInput() ">+
   </button>
 </div>
 <ul>
