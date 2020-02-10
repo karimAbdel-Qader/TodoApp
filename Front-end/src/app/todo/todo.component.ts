@@ -3,44 +3,53 @@ import {Todo} from '../ClassTodo';
 import {TodoDataService} from '../todo-data.service';
 
 @Component({
-    selector: 'app-todo',
-    templateUrl: './todo.component.html',
-    styleUrls: ['./todo.component.scss']
+  selector: 'app-todo',
+  templateUrl: './todo.component.html',
+  styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
 
-    constructor(private todoService: TodoDataService) {
-    }
+  constructor(private todoService: TodoDataService) {
+  }
 
-    todos: Todo[];
+  todos: Todo[];
+  buttonText = 'Done';
 
-    ngOnInit() {
-        this.getTodos();
-    }
 
-    getTodos(): void {
-        this.todoService.getTodos().subscribe(todos => this.todos = todos);
-    }
+  ngOnInit() {
+    this.getTodos();
+  }
 
-    add(name: string): void {
-        name = name.trim();
-        if (!name) {
-            return;
-        }
-        this.todoService.addTodo({name} as Todo).subscribe(todo => {
-            if (!todo.name) {
-                this.todos.push(todo);
-            }
-        });
-    }
+  getTodos(): void {
+    this.todoService.getTodos().subscribe(todos => this.todos = todos);
+  }
 
-    delete(todo: Todo): void {
-        this.todos = this.todos.filter(t => t !== todo);
-        this.todoService.deleteTodo(todo).subscribe();
+  add(name: string): void {
+    name = name.trim();
+    if (!name) {
+      return;
     }
+    this.todoService.addTodo({name} as Todo).subscribe(todo => {
+      if (!todo.name) {
+        this.todos.push(todo);
+      }
+    });
+  }
 
-    update(todo: Todo): void {
-        todo.complete = true;
-        this.todoService.UpdateTodo(todo).subscribe();
-    }
+  delete(todo: Todo): void {
+    this.todos = this.todos.filter(t => t !== todo);
+    this.todoService.deleteTodo(todo).subscribe();
+  }
+
+  update(todo: Todo): void {
+    todo.complete = !todo.complete;
+    this.todoService.UpdateTodo(todo).subscribe(() => {
+      if (todo.complete) {
+        this.buttonText = 'Undone';
+      } else {
+        this.buttonText = 'Done';
+      }
+    });
+  }
+
 }

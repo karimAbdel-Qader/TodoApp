@@ -2,7 +2,6 @@
   <label>Todo:
     <input #todoName autofocus/>
   </label>
-  <!-- (click) passes input value to add() and then clears the input -->
   <button (click)="add(todoName.value); todoName.value=''">+
   </button>
 </div>
@@ -10,7 +9,7 @@
   <li *ngFor="let todo of todos">
     <span class="badge">{{todo.id}}</span> {{todo.name}}
     <button class="done" title="delete todo"
-            (click)="update(todo)">Done
+            (click)="update(todo)">{{buttonText}}
     </button>
     <button class="delete" title="delete todo"
             (click)="delete(todo)">x
