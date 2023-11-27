@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: TodoApp
+  annotations:
+    github.com/project-slug: karimAbdel-Qader/TodoApp
+spec:
+  type: other
+  lifecycle: unknown
+  owner: Karim
